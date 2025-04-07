@@ -1,3 +1,7 @@
+using System;
+using Microsoft.EntityFrameworkCore;
+using PaginaWebNad.Context;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -8,6 +12,9 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
+
+var connectionString = builder.Configuration.GetConnectionString("Connection");
+builder.Services.AddDbContext<DbsgiceContext>(options => options.UseSqlServer(connectionString));
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
