@@ -1,1 +1,82 @@
-<p>pagina-info works!</p>
+<div class="container">
+    <!-- Filtros -->
+    <div class="filters">
+      <div class="filter-item">
+        <label for="cliente">Filtrar Cliente:</label>
+        <input [(ngModel)]="filtros.cliente" id="cliente" type="text" placeholder="Cliente">
+      </div>
+  
+      <div class="filter-item">
+        <label for="servidor">Filtrar Servidor:</label>
+        <input [(ngModel)]="filtros.servidor" id="servidor" type="text" placeholder="Servidor">
+      </div>
+  
+      <div class="filter-item">
+        <label for="sistema">Filtrar Sistema:</label>
+        <select [(ngModel)]="filtros.sistema" id="sistema">
+          <option value="">Seleccione</option>
+          <option *ngFor="let sistema of sistemas" [value]="sistema">{{ sistema }}</option>
+        </select>
+      </div>
+    </div>
+  
+    <!-- Botones alineados a la derecha -->
+    <div class="buttons">
+      <button (click)="limpiarFiltros()" class="btn btn-secondary">Limpiar</button>
+      <button (click)="filtrarDatos()" class="btn btn-primary">Filtrar</button>
+      <button (click)="generarReporte()" class="btn btn-success">Reporte</button>
+    </div>
+  
+    <!-- Tabla -->
+    <div class="table-container">
+      <table>
+        <thead>
+          <tr>
+            <th>Cliente</th>
+            <th>Servidor APP</th>
+            <th>Servidor BD</th>
+            <th>SOX</th>
+            <th>SGCE</th>
+            <th>SGRO</th>
+            <th>SGOV</th>
+            <th>SGI</th>
+            <th>SGC</th>
+            <th>SIA</th>
+            <th>SGOV02</th>
+            <th>SSCS</th>
+            <th>SGOVvery</th>
+            <th>SGFO</th>
+            <th>MJE VLEGAL</th>
+            <th>GTOSPES</th>
+            <th>ARCO</th>
+            <th>PROFORMAS</th>
+            <th>SGA</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of tablaDatos">
+            <td>{{ item.cliente }}</td>
+            <td>{{ item.servidorApp }}</td>
+            <td>{{ item.servidorBd }}</td>
+            <td>{{ item.sox }}</td>
+            <td>{{ item.sgce }}</td>
+            <td>{{ item.sgro }}</td>
+            <td>{{ item.sgov }}</td>
+            <td>{{ item.sgi }}</td>
+            <td>{{ item.sgc }}</td>
+            <td>{{ item.sia }}</td>
+            <td>{{ item.sgov02 }}</td>
+            <td>{{ item.sscs }}</td>
+            <td>{{ item.sgovvery }}</td>
+            <td>{{ item.sgfo }}</td>
+            <td>{{ item.mjeVlegal }}</td>
+            <td>{{ item.gtospes }}</td>
+            <td>{{ item.arco }}</td>
+            <td>{{ item.proformas }}</td>
+            <td>{{ item.sga }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  

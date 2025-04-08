@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { PaginaInicioRoutingModule } from './pagina-inicio-routing.module';
 import { PaginaInicioComponent } from './pagina-inicio/pagina-inicio.component';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -11,7 +12,10 @@ import { PaginaInicioComponent } from './pagina-inicio/pagina-inicio.component';
   ],
   imports: [
     CommonModule,
-    PaginaInicioRoutingModule
+    PaginaInicioRoutingModule,
+    FormsModule,
+    
   ]
 })
+
 export class PaginaInicioModule { }

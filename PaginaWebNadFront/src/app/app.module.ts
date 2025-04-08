@@ -30,11 +30,13 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
+import { PaginaInicioModule } from './pagina-inicio/pagina-inicio.module';
+import { PaginaInfoModule } from './pagina-info/pagina-info.module';
 //import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
-    AppComponent,
+    AppComponent
   ],
   imports: [
     BrowserModule,
@@ -69,7 +71,11 @@ import { HttpClientModule } from '@angular/common/http';
     //   positionClass: 'toast-top-right',
     //   preventDuplicates: true,
     // }),
-   CommonModule,  // Agregar CommonModule si se utiliza en este módulo
+   CommonModule,  // Agregar CommonModule si se utiliza en este módulo]
+   FormsModule,
+   PaginaInicioModule,
+   PaginaInfoModule
+   
   ],
   providers: [
     provideAnimationsAsync(),

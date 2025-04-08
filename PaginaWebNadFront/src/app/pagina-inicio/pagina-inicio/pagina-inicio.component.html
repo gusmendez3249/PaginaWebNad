@@ -1,1 +1,24 @@
-<p>pagina-inicio works!</p>
+<div class="container">
+    <div class="card">
+        <h2 class="title">Filtrar Información</h2>
+
+        <!-- Contenedor de filtros en línea -->
+        <div class="filters">
+            <div class="input-group">
+                <label for="cliente">Buscar por Cliente</label>
+                <input type="text" id="cliente" name="cliente" [(ngModel)]="cliente" class="form-control">
+            </div>
+
+            <div class="input-group">
+                <label for="usuario">Buscar por Usuario</label>
+                <input type="text" id="usuario" name="usuario" [(ngModel)]="usuario" class="form-control">
+            </div>
+        </div>
+
+        <!-- Contenedor de botones con amplia separación -->
+        <div class="buttons">
+            <button (click)="irASiguientePantalla()" class="btn btn-primary">Buscar</button>
+            <button (click)="irASiguientePantalla()" class="btn btn-secondary">Cancelar</button>
+        </div>      
+    </div>
+</div>
