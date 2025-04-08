@@ -11,10 +11,13 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+// 1. Registrar el DbContext aquí (parte de la configuración inicial)
+var connectionString = builder.Configuration.GetConnectionString("Connection");
+builder.Services.AddDbContext<DbsgiceContext>(options =>
+    options.UseSqlServer(connectionString));
+
 var app = builder.Build();
 
-var connectionString = builder.Configuration.GetConnectionString("Connection");
-builder.Services.AddDbContext<DbsgiceContext>(options => options.UseSqlServer(connectionString));
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

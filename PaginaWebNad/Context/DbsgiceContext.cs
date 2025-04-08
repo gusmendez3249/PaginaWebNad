@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
+using PaginaWebNad.Models;
 
-namespace PaginaWebNad.Models;
+namespace PaginaWebNad.Context;
 
 public partial class DbsgiceContext : DbContext
 {
