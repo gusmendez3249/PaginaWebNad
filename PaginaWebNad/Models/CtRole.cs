@@ -13,5 +13,7 @@ public partial class CtRole
 
     public int IEstatus { get; set; }
 
+    public virtual ICollection<TUsuarioSistemaRol> TUsuarioSistemaRols { get; set; } = new List<TUsuarioSistemaRol>();
+
     public virtual ICollection<TrRolesSistema> TrRolesSistemas { get; set; } = new List<TrRolesSistema>();
 }

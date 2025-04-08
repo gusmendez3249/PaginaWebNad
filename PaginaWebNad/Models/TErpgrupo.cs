@@ -11,5 +11,9 @@ public partial class TErpgrupo
 
     public string? UrlErp { get; set; }
 
+    public int? IIdCliente { get; set; }
+
+    public virtual Cliente? IIdClienteNavigation { get; set; }
+
     public virtual ICollection<TErpgrupoSistema> TErpgrupoSistemas { get; set; } = new List<TErpgrupoSistema>();
 }

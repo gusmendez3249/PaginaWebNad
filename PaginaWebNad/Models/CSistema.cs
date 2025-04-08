@@ -15,5 +15,7 @@ public partial class CSistema
 
     public virtual ICollection<TErpgrupoSistema> TErpgrupoSistemas { get; set; } = new List<TErpgrupoSistema>();
 
+    public virtual ICollection<TUsuarioSistemaRol> TUsuarioSistemaRols { get; set; } = new List<TUsuarioSistemaRol>();
+
     public virtual ICollection<TrRolesSistema> TrRolesSistemas { get; set; } = new List<TrRolesSistema>();
 }

@@ -17,6 +17,8 @@ public partial class DbsgiceContext : DbContext
 
     public virtual DbSet<CSistema> CSistemas { get; set; }
 
+    public virtual DbSet<Cliente> Clientes { get; set; }
+
     public virtual DbSet<CtRole> CtRoles { get; set; }
 
     public virtual DbSet<TErpgrupo> TErpgrupos { get; set; }
@@ -25,13 +27,15 @@ public partial class DbsgiceContext : DbContext
 
     public virtual DbSet<TUsuario> TUsuarios { get; set; }
 
+    public virtual DbSet<TUsuarioSistemaRol> TUsuarioSistemaRols { get; set; }
+
     public virtual DbSet<TrRolesSistema> TrRolesSistemas { get; set; }
 
     public virtual DbSet<TrRolesSistemaUsuariosGrupo> TrRolesSistemaUsuariosGrupos { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseSqlServer("Server=MARCO\\SQLEXPRESS;Database=DBSGICE;Trusted_Connection=True;TrustServerCertificate=true;");
+        => optionsBuilder.UseSqlServer("Server=MARCO\\SQLEXPRESS; Database=DBSGICE; Trusted_Connection=True; TrustServerCertificate=true;");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -53,6 +57,17 @@ public partial class DbsgiceContext : DbContext
                 .HasMaxLength(800)
                 .IsUnicode(false)
                 .HasColumnName("url");
+        });
+
+        modelBuilder.Entity<Cliente>(entity =>
+        {
+            entity.HasKey(e => e.IIdCliente).HasName("PK__Clientes__4504E24034D0090C");
+
+            entity.Property(e => e.IIdCliente).HasColumnName("iIdCliente");
+            entity.Property(e => e.SNombre)
+                .HasMaxLength(100)
+                .IsUnicode(false)
+                .HasColumnName("sNombre");
         });
 
         modelBuilder.Entity<CtRole>(entity =>
@@ -80,6 +95,7 @@ public partial class DbsgiceContext : DbContext
             entity.ToTable("tERPGrupo");
 
             entity.Property(e => e.IdErpgrupo).HasColumnName("idERPGrupo");
+            entity.Property(e => e.IIdCliente).HasColumnName("iIdCliente");
             entity.Property(e => e.NomGrupo)
                 .HasMaxLength(500)
                 .IsUnicode(false)
@@ -88,6 +104,10 @@ public partial class DbsgiceContext : DbContext
                 .HasMaxLength(100)
                 .IsUnicode(false)
                 .HasColumnName("urlERP");
+
+            entity.HasOne(d => d.IIdClienteNavigation).WithMany(p => p.TErpgrupos)
+                .HasForeignKey(d => d.IIdCliente)
+                .HasConstraintName("FK__tERPGrupo__iIdCl__5DCAEF64");
         });
 
         modelBuilder.Entity<TErpgrupoSistema>(entity =>
@@ -133,6 +153,33 @@ public partial class DbsgiceContext : DbContext
                 .HasMaxLength(50)
                 .IsUnicode(false)
                 .HasColumnName("sUsuario");
+        });
+
+        modelBuilder.Entity<TUsuarioSistemaRol>(entity =>
+        {
+            entity.HasKey(e => e.IIdUsuarioSistemaRol).HasName("PK__tUsuario__6949B915360FE947");
+
+            entity.ToTable("tUsuarioSistemaRol");
+
+            entity.Property(e => e.IIdUsuarioSistemaRol).HasColumnName("iIdUsuarioSistemaRol");
+            entity.Property(e => e.IIdRol).HasColumnName("iIdRol");
+            entity.Property(e => e.IIdUsuario).HasColumnName("iIdUsuario");
+            entity.Property(e => e.IdSistema).HasColumnName("idSistema");
+
+            entity.HasOne(d => d.IIdRolNavigation).WithMany(p => p.TUsuarioSistemaRols)
+                .HasForeignKey(d => d.IIdRol)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK__tUsuarioS__iIdRo__628FA481");
+
+            entity.HasOne(d => d.IIdUsuarioNavigation).WithMany(p => p.TUsuarioSistemaRols)
+                .HasForeignKey(d => d.IIdUsuario)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK__tUsuarioS__iIdUs__60A75C0F");
+
+            entity.HasOne(d => d.IdSistemaNavigation).WithMany(p => p.TUsuarioSistemaRols)
+                .HasForeignKey(d => d.IdSistema)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK__tUsuarioS__idSis__619B8048");
         });
 
         modelBuilder.Entity<TrRolesSistema>(entity =>
